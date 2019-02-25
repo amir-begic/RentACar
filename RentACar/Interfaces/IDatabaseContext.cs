@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using RentACar.Models;
+using MongoDB.Driver;
 
 namespace RentACar.Interfaces
 {
-    public interface ICarService
+    public interface IDatabaseContext
     {
-        List<Car> GetCars();
+        IMongoDatabase GetDatabase();
+        IMongoClient GetMongoClient();
     }
 }

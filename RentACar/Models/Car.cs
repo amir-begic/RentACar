@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace RentACar.Models
 {
     public class Car
     {
-        private int LicenseNumber { get; set; }
-        private string Manufacturer { get; set; }
-        private string Type { get; set; }
-        private DateTime Manufactured { get; set; }
-        private int PricePerDay { get; set; }
-        private bool Available { get; set; }
+        [JsonIgnore]
+        public ObjectId Id { get; set; }
+        //[BsonId]
+        public int LicenseNumber { get; set; }
+        public string Manufacturer { get; set; }
+        public string Type { get; set; }
+        [BsonDateTimeOptions]
+        public DateTime Manufactured { get; set; }
+        public int PricePerDay { get; set; }
+        public bool Available { get; set; }
     }
 }

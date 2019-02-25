@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using MongoDB.Bson;
+using MongoDB.Bson.IO;
+using MongoDB.Driver;
+using RentACar.Interfaces;
+using RentACar.Models;
 
 namespace RentACar.Services
 {
-    public class CarService : Controller
+    public class CarService : ICarService
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        private readonly IDatabaseContext _databaseContext;
+
+        public CarService(IDatabaseContext databaseContext)
         {
-            return View();
+            _databaseContext = databaseContext;
+        }
+
+        public List<Car> GetCars()
+        {
+            var db = _databaseContext.GetDatabase();
+            var client = _databaseContext.GetMongoClient();
+
+            var _cars = db.GetCollection<Car>("Cars");
+
+            return _cars.Find(car => true).ToList();
         }
     }
 }
