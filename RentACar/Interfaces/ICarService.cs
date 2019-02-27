@@ -10,5 +10,6 @@ namespace RentACar.Interfaces
     public interface ICarService
     {
         List<Car> GetCars();
+        bool AddCar(Car car);
     }
 }

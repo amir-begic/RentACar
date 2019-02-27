@@ -23,11 +23,27 @@ namespace RentACar.Services
         public List<Car> GetCars()
         {
             var db = _databaseContext.GetDatabase();
-            var client = _databaseContext.GetMongoClient();
 
             var _cars = db.GetCollection<Car>("Cars");
 
             return _cars.Find(car => true).ToList();
+        }
+
+        public bool AddCar(Car car)
+        {
+            var db = _databaseContext.GetDatabase();
+
+            var _cars = db.GetCollection<Car>("Cars");
+            try
+            {
+                _cars.InsertOneAsync(car);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

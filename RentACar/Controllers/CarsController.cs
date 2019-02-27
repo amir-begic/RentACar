@@ -24,20 +24,14 @@ namespace RentACar.Controllers
         [HttpGet]
         public ActionResult<List<Car>> Get()
         {
-            var cars = _carService.GetCars();
-            return cars;
+            return _carService.GetCars();
         }
+        
 
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpPost]
+        public ActionResult<string> Post([FromBody] Car newCar)
         {
-            return "value";
+            return _carService.AddCar(newCar).ToString();
         }
-
-        /*[HttpPost]
-        public ActionResult<string> Post([FromBody] CarParam newCar)
-        {
-            return "value";
-        }*/
     }
 }
