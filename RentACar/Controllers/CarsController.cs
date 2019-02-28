@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RentACar.Interfaces;
 using RentACar.Models;
 
@@ -20,18 +15,18 @@ namespace RentACar.Controllers
             _carService = carService;
         }
 
-        // GET api/values
+        // GET api/cars
         [HttpGet]
-        public ActionResult<List<Car>> Get()
+        public JsonResult Get()
         {
-            return _carService.GetCars();
+            return new JsonResult(_carService.GetCars());
         }
         
 
         [HttpPost]
         public ActionResult<string> Post([FromBody] Car newCar)
         {
-            return _carService.AddCar(newCar).ToString();
+            return new JsonResult(_carService.AddCar(newCar));
         }
     }
 }

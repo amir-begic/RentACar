@@ -29,7 +29,7 @@ namespace RentACar.Services
             return _cars.Find(car => true).ToList();
         }
 
-        public bool AddCar(Car car)
+        public Car AddCar(Car car)
         {
             var db = _databaseContext.GetDatabase();
 
@@ -37,13 +37,20 @@ namespace RentACar.Services
             try
             {
                 _cars.InsertOneAsync(car);
+                return car;
+
             }
             catch
             {
-                return false;
+                return new Car();
             }
+        }
 
-            return true;
+        public Car GetSpecificCar()
+        {
+
+
+            return new Car();
         }
     }
 }

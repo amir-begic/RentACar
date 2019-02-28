@@ -32,6 +32,7 @@ namespace RentACar
             services.AddOptions();
             services.Configure<MongoDbConnectionConfiguration>(options => Configuration.GetSection("MongoDBConnection").Bind(options));
             services.AddTransient<ICarService, CarService>();
+            services.AddTransient<ICustomerService, CustomerService>();
             services.AddSingleton<IDatabaseContext, DatabaseContext>();
         }
 

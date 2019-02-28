@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace RentACar.Interfaces
 {
-    interface IContractService
+    public interface IContractService
     {
+        string DisplayContract();
+        bool CreateContract();
     }
 }

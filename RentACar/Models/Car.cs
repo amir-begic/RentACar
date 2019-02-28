@@ -10,10 +10,9 @@ namespace RentACar.Models
 {
     public class Car
     {
-        [JsonIgnore]
+        [BsonId]
         public ObjectId Id { get; set; }
-        //[BsonId]
-        public int LicenseNumber { get; set; }
+        public long LicenseNumber { get; set; }
         public string Manufacturer { get; set; }
         public string Type { get; set; }
         [BsonDateTimeOptions]
