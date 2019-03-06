@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "3828d5bc-b0e1-4595-ba2c-1f363a94ac28",
+		"name": "Testat Software Architektur RentACar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetCars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				},
+				"description": "Get all possible Cars"
+			},
+			"response": []
+		},
+		{
+			"name": "NewCar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n        \"LicenseNumber\": 1231234,\r\n\t\t\"Manufacturer\": \"Volvo\",\r\n\t\t\"Manufactured\": \"2017-12-03 00:00:00\",\r\n\t\t\"PricePerDay\": 40,\r\n\t\t\"Available\": true\r\n   \r\n        "
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/cars",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"cars"
+					]
+				},
+				"description": "Create a new Car entry in the mongoDB"
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				},
+				"description": "Gets all the Customers present in the Customers collection"
+			},
+			"response": []
+		},
+		{
+			"name": "NewCustomers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"Surname\": Doe,\r\n\t\t\"Name\": \"John\",\r\n\t\t\"Manufactured\": \"1980-08-12 00:00:00\",\r\n\t\t\"Prefix\": \"Mr.\",\r\n\t\t\"Available\": true,\r\n\t\t\"CustomerId\": \"DJEL-X33-WFEFA-CDE\"\r\n   \r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/cars",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"cars"
+					]
+				},
+				"description": "Creates a new Customer in the Cusotmers collection."
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCustomer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/customers/DJEL-X33-WFEFA-CDE",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"customers",
+						"DJEL-X33-WFEFA-CDE"
+					]
+				},
+				"description": "Deletes a customer with the help of the CustomerId"
+			},
+			"response": []
+		},
+		{
+			"name": "NewReservation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"ReservationId\": \"RES-134153\",\r\n\t\t\"Car\": {\r\n\t\t\t\"Id\": ObjectId(\"5c743e9768dbb1290c5eb48f\"),\r\n\t        \"LicenseNumber\": \"123413\",\r\n\t        \"Manufacturer\": \"Audi\",\r\n\t        \"Type\": \"A4\",\r\n\t        \"Manufactured\": \"2007-08-27 02:00:00.000\",\r\n\t        \"PricePerDay\": \"50\"\r\n\t      },\r\n\t\t\"Customer\":{\r\n\t\t\t\"Id\": ObjectId(\"5c78487bf4285889acb990ad\"),\r\n\t        \"Surname\": \"Doe\",\r\n\t        \"Name\": \"John\",\r\n\t        \"Prefix\": \"Mr.\",\r\n\t        \"Birthdate\": \"2001-01-01 01:00:00.000\",\r\n\t        \"CustomerId\": \"DJEL-X33-WFEFA-CDE\",\r\n\t        \"Available\":\"true\"\r\n\t      },\r\n\t\t\"From\": \"2019-03-12 02:00:00.000\",\r\n\t\t\"To\": \"2019-03-27 09:00:00.000\",\r\n\t\t\"Expires\": \"2019-03-12 08:00:00.000\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/reservations",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"reservations"
+					]
+				},
+				"description": "Create a new Reservation."
+			},
+			"response": []
+		},
+		{
+			"name": "GetReservations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/reservations",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"reservations"
+					]
+				},
+				"description": "Get all non expired Reservations"
+			},
+			"response": []
+		},
+		{
+			"name": "NewContract",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"ContractId\": \"CON-238234\",\r\n\t\t\"Reservation\": {\r\n\t\t\t\"Car\": {\r\n\t\t\t\"LicenseNumber\": \"123413\",\r\n\t        \"Manufacturer\": \"Audi\",\r\n\t        \"Type\": \"A4\",\r\n\t        \"Manufactured\": \"2007-08-27 02:00:00.000\",\r\n\t        \"PricePerDay\": \"50\"\r\n\t      },\r\n\t\t\"Customer\":{\r\n\t\t\t\"Surname\": \"Doe\",\r\n\t        \"Name\": \"John\",\r\n\t        \"Prefix\": \"Mr.\",\r\n\t        \"Birthdate\": \"2001-01-01 01:00:00.000\",\r\n\t        \"CustomerId\": \"DJEL-X33-WFEFA-CDE\"\r\n\t      },\r\n\t\t\"From\": \"2019-03-12 02:00:00.000\",\r\n\t\t\"To\": \"2019-03-27 09:00:00.000\",\r\n\t\t\"Expires\": \"2019-03-12 08:00:00.000\"\r\n\t\t},\r\n\t\t\"DueDate\": \"2020-03-12 02:00:00.000\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/contract",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"contract"
+					]
+				},
+				"description": "Creates a new Contract element in the database."
+			},
+			"response": []
+		},
+		{
+			"name": "GetContracts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				},
+				"description": "Get all Contracts in the database."
+			},
+			"response": []
+		}
+	]
+}
