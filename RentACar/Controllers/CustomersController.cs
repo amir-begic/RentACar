@@ -23,7 +23,6 @@ namespace RentACar.Controllers
             _customerService = customerService;
         }
 
-
         // GET: api/customers
         [HttpGet]
         public JsonResult Get()
@@ -40,9 +39,9 @@ namespace RentACar.Controllers
 
         // PUT api/<controller>
         [HttpPut("{customerId}")]
-        public void Put(int customerId, [FromBody]Customer updatedCustomer)
+        public void Put(string customerId, [FromBody]Customer updatedCustomer)
         {
-            _customerService.DeleteCustomer(customerId, updatedCustomer);
+            _customerService.UpdateCustomer(customerId, updatedCustomer);
         }
 
 
