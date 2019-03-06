@@ -23,28 +23,24 @@ namespace RentACar.Controllers
             _customerService = customerService;
         }
 
-        // GET: api/customers
         [HttpGet]
         public JsonResult Get()
         {
             return new JsonResult(_customerService.GetCustomers());
         }
 
-        // Post api/customers
         [HttpPost]
         public JsonResult Post([FromBody]Customer newCustomer)
         {
             return new JsonResult(_customerService.AddCustomer(newCustomer));
         }
-
-        // PUT api/<controller>
+        
         [HttpPut("{customerId}")]
         public void Put(string customerId, [FromBody]Customer updatedCustomer)
         {
             _customerService.UpdateCustomer(customerId, updatedCustomer);
         }
-
-
+        
         [HttpDelete("{customerId}")]
         public void Delete(string customerId)
         {

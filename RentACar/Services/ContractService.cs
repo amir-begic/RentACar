@@ -1,19 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using MongoDB.Driver;
+using RentACar.Interfaces;
+using RentACar.Models;
 
 namespace RentACar.Services
 {
-    public class ContractService : Controller
+    public class ContractService : IContractService
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+
+        private readonly IDatabaseContext _databaseContext;
+
+        public ContractService(IDatabaseContext databaseContext)
         {
-            return View();
+            _databaseContext = databaseContext;
+        }
+
+        public Contract AddContract(Contract newContract)
+        {
+            newContract.Price = CalculatePrice(newContract.Reservation.Car.PricePerDay, newContract.Reservation.From,
+                newContract.Reservation.To);
+
+            var db = _databaseContext.GetDatabase();
+
+            var _contracts = db.GetCollection<Contract>("Contracts");
+            try
+            {
+                _contracts.InsertOneAsync(newContract);
+                return newContract;
+            }
+            catch
+            {
+                return new Contract();
+            }
+        }
+
+        public Contract GetContract(string contractId)
+        {
+            var db = _databaseContext.GetDatabase();
+
+            var _contracts = db.GetCollection<Contract>("Contracts");
+
+            return _contracts.Find(c => c.ContractId== contractId).Single();
+        }
+
+        public List<Contract> GetContracts()
+        {
+            var db = _databaseContext.GetDatabase();
+
+            var _contracts = db.GetCollection<Contract>("Contracts");
+
+            return _contracts.Find(reservation => true).ToList();
+        }
+
+        public void UpdateContract(string contractId, Contract updatedContract)
+        {
+            updatedContract.Price = CalculatePrice(updatedContract.Reservation.Car.PricePerDay, updatedContract.Reservation.From,
+                updatedContract.Reservation.To);
+
+            var db = _databaseContext.GetDatabase();
+
+            var _contracts = db.GetCollection<Contract>("Contracts");
+
+            _contracts.ReplaceOneAsync(c => c.ContractId == contractId, updatedContract);
+        }
+
+        private double CalculatePrice(int pricePerDay, DateTime from, DateTime to)
+        {
+            return (to - from).TotalDays * pricePerDay;
         }
     }
 }

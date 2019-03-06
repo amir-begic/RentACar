@@ -34,6 +34,7 @@ namespace RentACar
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IReservationService, ReservationService>();
+            services.AddTransient<IContractService, ContractService>();
             services.AddSingleton<IDatabaseContext, DatabaseContext>();
         }
 

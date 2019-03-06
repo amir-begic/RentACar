@@ -11,6 +11,5 @@ namespace RentACar.Interfaces
     {
         List<Car> GetCars();
         Car AddCar(Car car);
-       // string GetSpecificCar(string licenseNumber);
     }
 }

@@ -15,13 +15,11 @@ namespace RentACar.Controllers
             _carService = carService;
         }
 
-        // GET api/cars
         [HttpGet]
         public JsonResult Get()
         {
             return new JsonResult(_carService.GetCars());
         }
-        
 
         [HttpPost]
         public ActionResult<string> Post([FromBody] Car newCar)
